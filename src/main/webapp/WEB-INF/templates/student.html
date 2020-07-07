@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+<h1>Student</h1>
+<p th:text=${student.firstName}>Student name</p>  <!--getFirstName()-->
+<p th:text=${student.getLastName()}>Student Last Name</p>  <!--getLastName()-->
+<p th:text=${student['email']}>Student Last Name</p>  <!--getLastName()-->
+
+<a href="/student/new">New Student</a>
+
+
+<p th:text=${students[0].email}>Email</p>
+<p th:text=${students[1].email}>Email</p>
+<p th:text=${students[2].email}>Email</p>
+
+
+</body>
+</html>
