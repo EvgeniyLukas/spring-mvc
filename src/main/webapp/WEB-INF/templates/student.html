@@ -13,10 +13,33 @@
 <a href="/student/new">New Student</a>
 
 
-<p th:text=${students[0].email}>Email</p>
-<p th:text=${students[1].email}>Email</p>
-<p th:text=${students[2].email}>Email</p>
+<!--<p th:text=${students[0].email}>Email</p>-->
+<!--<p th:text=${students[1].email}>Email</p>-->
+<!--<p th:text=${students[2].email}>Email</p>-->
 
+<div>
+    <table style="border: 1px solid">
+        <tr th:each="st : ${students}" style="border: 1px solid">
+            <td th:text="${st.firstName}"></td>
+            <td th:text="${st.lastName}"></td>
+            <td th:text="${st.age} > 18 ? 'Yes' : 'NO'"></td>
+            <td th:text="${st.email}"></td>
+        </tr>
+    </table>
+</div>
+
+<br>
+<P>IF</P>
+<div th:if="${students1.size()>2}">
+    <p th:text=${students1[1]}></p>
+</div>
+<br>
+<P>switch</P>
+<div th:switch="${students2.size()}">
+    <p th:case="1">First</p>
+    <p th:case="2">Second</p>
+    <p th:case="3">Third</p>
+</div>
 
 </body>
 </html>

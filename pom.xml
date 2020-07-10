@@ -55,6 +55,20 @@
           <version>5.2.1.RELEASE</version>
       </dependency>
 
+      <!-- spring-orm -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-orm</artifactId>
+          <version>5.2.1.RELEASE</version>
+      </dependency>
+
+      <!-- spring-jdbc -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-jdbc</artifactId>
+          <version>5.2.1.RELEASE</version>
+      </dependency>
+
       <!-- thymeleaf-spring5 -->
       <dependency>
           <groupId>org.thymeleaf</groupId>

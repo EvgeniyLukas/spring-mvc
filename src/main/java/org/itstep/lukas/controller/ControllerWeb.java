@@ -15,11 +15,10 @@ import java.util.List;
 @Controller
 public class ControllerWeb {
 
-
     List<Student> students = new ArrayList<>();
 
     @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name",required = false, defaultValue = "noname")String name,  Model model){
+    public String hello(@RequestParam(value = "name", required = false, defaultValue = "noname")String name,  Model model){
         model.addAttribute("massage", "Hello from " + name);
         return "hello";
     }
@@ -49,17 +48,23 @@ public class ControllerWeb {
     @GetMapping("/student")
     public String getStudentExample(Model model){
         model.addAttribute("student", setTestStudent());
+        model.addAttribute("students", students);
+        model.addAttribute("students1", students);
+        model.addAttribute("students2", students);
+        System.out.println(students);
         return "student";
     }
+
+
 
 
     @GetMapping("/students")
     public String getStudents(Model model){
         model.addAttribute("student", setTestStudent());
         List<Student> students = Arrays.asList(
-                new Student("Petr", "Petrov", "petro@gmail.com"),
-                new Student("Oleg", "klichko", "kiev@gmail.com"),
-                new Student("Rhonda", "Christian", "ckisrt@gmail.com")
+                new Student("Petr", "Petrov", 12, "petro@gmail.com"),
+                new Student("Oleg", "klichko",33, "kiev@gmail.com"),
+                new Student("Rhonda", "Christian", 55,"ckisrt@gmail.com")
         );
         model.addAttribute("students", students);
         return "student";
