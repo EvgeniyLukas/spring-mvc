@@ -1,10 +1,25 @@
 package org.itstep.lukas.model;
 
+
+
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "student")
 public class Student {
+    @Id
+    @Column(name = "id_student")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @Column(name = "first_name")
     String firstName;
+    @Column(name = "last_name")
     String lastName;
+    @Column(name = "age")
     int age;
+    @Column(name = "email")
     String email;
 
     public Student() {
