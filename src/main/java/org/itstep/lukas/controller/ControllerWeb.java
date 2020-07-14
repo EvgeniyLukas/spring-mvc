@@ -1,8 +1,10 @@
 package org.itstep.lukas.controller;
 
 import org.itstep.lukas.dao.hibernateimpl.HibernateStudentDAOImpl;
+import org.itstep.lukas.dao.hibernateimpl.HibernateTeacherDAOImpl;
 import org.itstep.lukas.dto.StudentDTO;
 import org.itstep.lukas.model.Student;
+import org.itstep.lukas.model.Teacher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +22,11 @@ public class ControllerWeb {
 
     private final HibernateStudentDAOImpl hibernateStudentDAO;
 
-    public ControllerWeb(HibernateStudentDAOImpl hibernateStudentDAO) {
+    private final HibernateTeacherDAOImpl hibernateTeacherDAO;
+
+    public ControllerWeb(HibernateStudentDAOImpl hibernateStudentDAO, HibernateTeacherDAOImpl hibernateTeacherDAO) {
         this.hibernateStudentDAO = hibernateStudentDAO;
+        this.hibernateTeacherDAO = hibernateTeacherDAO;
     }
 
 
@@ -57,12 +62,14 @@ public class ControllerWeb {
     public String getStudentExample(Model model) {
         model.addAttribute("student", setTestStudent());
         model.addAttribute("students", hibernateStudentDAO.getAll());
-        model.addAttribute("students1", hibernateStudentDAO.getAll());
-        model.addAttribute("students2", hibernateStudentDAO.getAll());
-        //System.out.println(students);
+        //model.addAttribute("teachers", hibernateTeacherDAO.getAll());
         return "student";
     }
-
+    @GetMapping("/teacher")
+    public String getTeacherExample(Model model) {
+        model.addAttribute("teachers", hibernateTeacherDAO.getAll());
+        return "teacher";
+    }
 
     @GetMapping("/students")
     public String getStudents(Model model) {

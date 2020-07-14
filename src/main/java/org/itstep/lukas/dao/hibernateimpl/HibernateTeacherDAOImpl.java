@@ -2,21 +2,22 @@ package org.itstep.lukas.dao.hibernateimpl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.itstep.lukas.dao.StudentDAO;
+import org.itstep.lukas.dao.TeacherDAO;
 import org.itstep.lukas.model.Student;
+import org.itstep.lukas.model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class HibernateStudentDAOImpl implements StudentDAO {
+public class HibernateTeacherDAOImpl implements TeacherDAO {
 
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public HibernateStudentDAOImpl(SessionFactory sessionFactory) {
+    public HibernateTeacherDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -26,28 +27,27 @@ public class HibernateStudentDAOImpl implements StudentDAO {
 
 
     @Override
-    public void save(Student student) {
-        currentSession().save(student);
+    public void save(Teacher teacher) {
+        currentSession().save(teacher);
     }
 
-    @Override
-    public void update(Student entity) {
-
-    }
-
-    @Override
-    public void remove(Student student) {
-        currentSession().remove(student);
-    }
-
-
-    public List<Student> getAll() {
-        return currentSession().createQuery("from Student", Student.class).list();
+    public List<Teacher> getAll() {
+        return currentSession().createQuery("from Teacher", Teacher.class).list();
 
     }
 
     @Override
-    public Student getById(Long aLong) {
+    public void update(Teacher teacher) {
+
+    }
+
+    @Override
+    public void remove(Teacher teacher) {
+
+    }
+
+    @Override
+    public Teacher getById(Long id) {
         return null;
     }
 }

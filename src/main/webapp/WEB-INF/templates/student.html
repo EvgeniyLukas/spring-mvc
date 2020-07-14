@@ -27,19 +27,31 @@
         </tr>
     </table>
 </div>
+<br>
 
-<br>
-<P>IF</P>
-<div th:if="${students1.size()>2}">
-    <p th:text=${students1[1]}></p>
+<div>
+    <table style="border: 1px solid">
+        <tr th:each="th : ${teachers}" style="border: 1px solid">
+            <td th:text="${th.firstName}"></td>
+            <td th:text="${th.lastName}"></td>
+            <td th:text="${th.age} > 21 ? 'Yes' : 'NO'"></td>
+            <td th:text="${th.email}"></td>
+        </tr>
+    </table>
 </div>
-<br>
-<P>switch</P>
-<div th:switch="${students2.size()}">
-    <p th:case="1">First</p>
-    <p th:case="2">Second</p>
-    <p th:case="3">Third</p>
-</div>
+
+
+<!--<P>IF</P>-->
+<!--<div th:if="${students1.size()>2}">-->
+<!--    <p th:text=${students1[1]}></p>-->
+<!--</div>-->
+<!--<br>-->
+<!--<P>switch</P>-->
+<!--<div th:switch="${students2.size()}">-->
+<!--    <p th:case="1">First</p>-->
+<!--    <p th:case="2">Second</p>-->
+<!--    <p th:case="3">Third</p>-->
+<!--</div>-->
 
 </body>
 </html>

@@ -1,57 +1,37 @@
 package org.itstep.lukas.model;
 
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "student")
-public class Student {
-    @Id
-    @Column(name = "id_student")
+@Table(name = "teacher")
+public class Teacher {
+    @Id()
+    @Column(name = "id_teacher")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     @Column(name = "first_name")
     String firstName;
     @Column(name = "last_name")
-    String lastName;
+    String LastName;
     @Column(name = "age")
     int age;
     @Column(name = "email")
     String email;
 
-    @ManyToMany
-    @JoinTable(name = "lesson",
-            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id_student"),
-            inverseJoinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id_teacher"))
-    Set<Teacher> teachers = new HashSet<>();
+    @ManyToMany(mappedBy = "teachers")
+    Set<Student>students = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
-    private Group group;
-
-
-
-    public Student() {
+    public Teacher() {
     }
 
-
-
-    public Set<Teacher> getTeachers() {
-        return teachers;
+    public Long getId() {
+        return id;
     }
 
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
-    }
-
-    public Student(String firstName, String lastName, int age, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.email = email;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -63,11 +43,11 @@ public class Student {
     }
 
     public String getLastName() {
-        return lastName;
+        return LastName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        LastName = lastName;
     }
 
     public int getAge() {
@@ -88,13 +68,12 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Teacher{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", LastName='" + LastName + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
-                ", teachers=" + teachers +
                 '}';
     }
 }
