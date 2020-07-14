@@ -62,7 +62,7 @@ public class ControllerWeb {
     public String getStudentExample(Model model) {
         model.addAttribute("student", setTestStudent());
         model.addAttribute("students", hibernateStudentDAO.getAll());
-        //model.addAttribute("teachers", hibernateTeacherDAO.getAll());
+        model.addAttribute("teachers", hibernateTeacherDAO.getAll());
         return "student";
     }
     @GetMapping("/teacher")
