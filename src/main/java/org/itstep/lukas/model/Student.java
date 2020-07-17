@@ -1,6 +1,8 @@
 package org.itstep.lukas.model;
 
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +24,7 @@ public class Student {
     @Column(name = "email")
     String email;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "lesson",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id_student"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id", referencedColumnName = "id_teacher"))

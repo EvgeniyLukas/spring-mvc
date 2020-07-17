@@ -1,15 +1,13 @@
 package org.itstep.lukas.controller;
 
-import org.itstep.lukas.dao.hibernateimpl.HibernateStudentDAOImpl;
-import org.itstep.lukas.dao.hibernateimpl.HibernateTeacherDAOImpl;
 import org.itstep.lukas.dto.StudentDTO;
 import org.itstep.lukas.model.Student;
-import org.itstep.lukas.model.Teacher;
+import org.itstep.lukas.service.StudentServiceImpl;
+import org.itstep.lukas.service.TeacherServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,18 +15,25 @@ import java.util.List;
 @Controller
 public class ControllerWeb {
 
-    List<Student> students = new ArrayList<>();
+    //List<Student> students = new ArrayList<>();
 
 
-    private final HibernateStudentDAOImpl hibernateStudentDAO;
+//    private final HibernateStudentDAOImpl hibernateStudentDAO;
+//    private final HibernateTeacherDAOImpl hibernateTeacherDAO;
+//
+//    public ControllerWeb(HibernateStudentDAOImpl hibernateStudentDAO, HibernateTeacherDAOImpl hibernateTeacherDAO) {
+//        this.hibernateStudentDAO = hibernateStudentDAO;
+//        this.hibernateTeacherDAO = hibernateTeacherDAO;
+//    }
 
-    private final HibernateTeacherDAOImpl hibernateTeacherDAO;
 
-    public ControllerWeb(HibernateStudentDAOImpl hibernateStudentDAO, HibernateTeacherDAOImpl hibernateTeacherDAO) {
-        this.hibernateStudentDAO = hibernateStudentDAO;
-        this.hibernateTeacherDAO = hibernateTeacherDAO;
+    private final StudentServiceImpl studentService;
+    private  final TeacherServiceImpl teacherService;
+
+    public ControllerWeb(StudentServiceImpl studentService, TeacherServiceImpl teacherService) {
+        this.studentService = studentService;
+        this.teacherService = teacherService;
     }
-
 
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", required = false, defaultValue = "noname") String name, Model model) {
@@ -58,16 +63,19 @@ public class ControllerWeb {
     }
 
 
-    @GetMapping("/student")
-    public String getStudentExample(Model model) {
+    @GetMapping("/student/{email}")
+    public String getStudentExample(@PathVariable(value = "email")String email,  Model model) {
         model.addAttribute("student", setTestStudent());
-        model.addAttribute("students", hibernateStudentDAO.getAll());
-        model.addAttribute("teachers", hibernateTeacherDAO.getAll());
+        model.addAttribute("students", studentService.getAll());
+        model.addAttribute("teachers", teacherService.getAll());
+        //model.addAttribute("student", studentService.findByEmail(email));
+        System.out.println(studentService.findByEmail(email));
         return "student";
     }
+
     @GetMapping("/teacher")
     public String getTeacherExample(Model model) {
-        model.addAttribute("teachers", hibernateTeacherDAO.getAll());
+        model.addAttribute("teachers", studentService.getAll());
         return "teacher";
     }
 
@@ -99,7 +107,7 @@ public class ControllerWeb {
     public String signUp(@ModelAttribute Student student) {
         //students.add(student);
         System.out.println("student = " + student);
-        hibernateStudentDAO.save(student);
+        studentService.save(student);
         return "redirect:/student";
     }
 }

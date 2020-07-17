@@ -33,6 +33,7 @@ public class HibernateStudentDAOImpl implements StudentDAO {
     @Override
     public void update(Student entity) {
 
+
     }
 
     @Override
@@ -43,7 +44,6 @@ public class HibernateStudentDAOImpl implements StudentDAO {
 
     public List<Student> getAll() {
         return currentSession().createQuery("from Student", Student.class).list();
-
     }
 
     @Override

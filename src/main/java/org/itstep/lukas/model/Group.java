@@ -1,5 +1,7 @@
 package org.itstep.lukas.model;
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +15,7 @@ public class Group {
     @Column(name = "name")
     String name;
 
-    @OneToMany(mappedBy = "group",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Student> students = new HashSet<>();
 
     public Group() {
