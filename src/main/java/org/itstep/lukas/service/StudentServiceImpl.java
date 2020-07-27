@@ -5,6 +5,7 @@ import org.itstep.lukas.model.Student;
 import org.itstep.lukas.model.Teacher;
 import org.itstep.lukas.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,14 +18,18 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    public StudentServiceImpl(HibernateStudentDAOImpl hibernateStudentDAO, StudentRepository studentRepository) {
+    public StudentServiceImpl(HibernateStudentDAOImpl hibernateStudentDAO, StudentRepository studentRepository, PasswordEncoder passwordEncoder) {
         this.hibernateStudentDAO = hibernateStudentDAO;
         this.studentRepository = studentRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void save(Student student) {
+        student.setPassword(passwordEncoder.encode(student.getPassword()));
         hibernateStudentDAO.save(student);
     }
 

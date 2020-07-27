@@ -18,6 +18,7 @@ public class ControllerWeb {
     //List<Student> students = new ArrayList<>();
 
 
+
 //    private final HibernateStudentDAOImpl hibernateStudentDAO;
 //    private final HibernateTeacherDAOImpl hibernateTeacherDAO;
 //
@@ -26,7 +27,6 @@ public class ControllerWeb {
 //        this.hibernateTeacherDAO = hibernateTeacherDAO;
 //    }
 
-
     private final StudentServiceImpl studentService;
     private  final TeacherServiceImpl teacherService;
 
@@ -34,6 +34,13 @@ public class ControllerWeb {
         this.studentService = studentService;
         this.teacherService = teacherService;
     }
+
+
+    @GetMapping("/")
+    public String main(){
+        return "redirect:/student";
+    }
+
 
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", required = false, defaultValue = "noname") String name, Model model) {
@@ -63,13 +70,13 @@ public class ControllerWeb {
     }
 
 
-    @GetMapping("/student/{email}")
-    public String getStudentExample(@PathVariable(value = "email")String email,  Model model) {
+    @GetMapping("/student")
+    public String getStudentExample(Model model) {
         model.addAttribute("student", setTestStudent());
         model.addAttribute("students", studentService.getAll());
         model.addAttribute("teachers", teacherService.getAll());
         //model.addAttribute("student", studentService.findByEmail(email));
-        System.out.println(studentService.findByEmail(email));
+        //System.out.println(studentService.findByEmail(email));
         return "student";
     }
 
@@ -83,9 +90,9 @@ public class ControllerWeb {
     public String getStudents(Model model) {
         model.addAttribute("student", setTestStudent());
         List<Student> students = Arrays.asList(
-                new Student("Petr", "Petrov", 12, "petro@gmail.com"),
-                new Student("Oleg", "klichko", 33, "kiev@gmail.com"),
-                new Student("Rhonda", "Christian", 55, "ckisrt@gmail.com")
+//                new Student("Petr", "Petrov", 12, "petro@gmail.com"),
+//                new Student("Oleg", "klichko", 33, "kiev@gmail.com"),
+//                new Student("Rhonda", "Christian", 55, "ckisrt@gmail.com")
         );
         model.addAttribute("students", students);
         return "student";
@@ -97,17 +104,5 @@ public class ControllerWeb {
         return "obj";
     }
 
-    @GetMapping("/student/new")
-    public String signUp() {
-        return "signup";
-    }
 
-
-    @PostMapping("/student/new")
-    public String signUp(@ModelAttribute Student student) {
-        //students.add(student);
-        System.out.println("student = " + student);
-        studentService.save(student);
-        return "redirect:/student";
-    }
 }

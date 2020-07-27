@@ -23,6 +23,8 @@ public class Student {
     int age;
     @Column(name = "email")
     String email;
+    @Column(name = "password")
+    String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "lesson",
@@ -34,13 +36,6 @@ public class Student {
     @JoinColumn(name = "group_id")
     private Group group;
 
-
-
-    public Student() {
-    }
-
-
-
     public Set<Teacher> getTeachers() {
         return teachers;
     }
@@ -49,11 +44,23 @@ public class Student {
         this.teachers = teachers;
     }
 
-    public Student(String firstName, String lastName, int age, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.email = email;
+    public Student() {
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public String getFirstName() {
